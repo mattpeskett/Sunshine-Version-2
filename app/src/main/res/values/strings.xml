@@ -17,6 +17,16 @@
     <!-- Menu label to fetch updated weather info from the server -->
     <string name="action_refresh" translatable="false">Refresh</string>
     <string name="title_activity_detail">Details</string>
+    <string name="title_activity_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+
+    <!-- Settings -->
+    <string name="setting_title_location">Location</string>
+    <string name="setting_key_location">location</string>
+    <string name="setting_value_location">M5J2S7</string>
+
+
+    <string name="setting_title_units">Units</string>
+    <string name="setting_key_units">units</string>
 
 </resources>

@@ -1,3 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string-array name="setting_labels_units">
+        <item>Metric</item>
+        <item>Empirical</item>
+    </string-array>
+
+    <string-array name="setting_values_units">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
 </resources>
