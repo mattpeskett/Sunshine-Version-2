@@ -16,8 +16,12 @@
 package com.example.android.sunshine.app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -32,6 +36,8 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new ForecastFragment())
                     .commit();
         }
+
+        Log.d("SEQUENCE", "onCreate");
     }
 
     @Override
@@ -55,6 +61,63 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
 
+        if (id == R.id.action_location) {
+            openPreferredLocationInMap();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openPreferredLocationInMap() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String postalCode = sharedPreferences.getString(getString(R.string.setting_key_location),
+                getString(R.string.setting_value_location));
+
+        Uri location = Uri.parse("geo:0,0?").buildUpon()
+                .appendQueryParameter("q", postalCode)
+                .build();
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(location);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+        else {
+            Log.d(MainActivity.class.getCanonicalName(), "Couldn't start map for " + postalCode);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("SEQUENCE", "onResume");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("SEQUENCE", "onStop");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        Log.d("SEQUENCE", "onPause");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("SEQUENCE", "onDestroy");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Log.d("SEQUENCE", "onStart");
     }
 }
